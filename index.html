@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Bot Ready</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1a1a1a; /* Dark background color */
+            color: #fff; /* Text color */
+        }
+        img {
+            max-width: 100%;
+            max-height: 70%;
+        }
+        #current-time {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #fff; /* Time text color */
+        }
+    </style>
+</head>
+<body>
+    <img src="https://images.scribblelive.com/2020/3/25/6e510a6f-4666-451b-8c96-311faedcbc27.gif" alt="Centered Image">
+    
+    <div id="current-time"></div>
+
+    <script>
+        function updateCurrentTime() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            var formattedTime = hours + ':' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+            document.getElementById('current-time').textContent = ' ' + formattedTime;
+        }
+
+        // Update time every second
+        setInterval(updateCurrentTime, 1000);
+
+        // Initial update
+        updateCurrentTime();
+    </script>
+</body>
+</html>
+
+
