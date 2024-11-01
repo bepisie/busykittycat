@@ -1,15 +1,15 @@
 class AskGemini {
     constructor() {
-        this.isGenerating = 'no'; // Variable to indicate if a prompt is currently being generated
+        this.isGeneratingStatus = 'no'; // Initialize generating status as "no"
     }
 
     getInfo() {
         return {
             id: "AskGemini",
             name: "Ask Gemini",
-            color1: "#FFFFFF", // Light color for the block background
-            color2: "#F0F0F0", // Slightly darker shade to maintain readability
-            color3: "#E0E0E0", // Even darker for borders or outlines
+            color1: "#1E88E5", // Primary blue-green color
+            color2: "#66BB6A", // Complementary green for a gradient effect
+            color3: "#43A047", // Darker green for borders or outlines
             blocks: [
                 {
                     opcode: "getPrompt",
@@ -50,7 +50,7 @@ class AskGemini {
     }
 
     getPrompt({ MODEL, PROMPT, API_KEY }) {
-        this.isGenerating = 'yes'; // Set generating status to yes
+        this.isGeneratingStatus = 'yes'; // Set generating status to "yes"
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
 
         return fetch(apiUrl, {
@@ -72,18 +72,18 @@ class AskGemini {
         })
         .then(data => {
             const promptText = data.candidates[0].content.parts[0].text.replace(/\\n/g, '\n'); // Replace escaped newlines
-            this.isGenerating = 'no'; // Set generating status back to no
+            this.isGeneratingStatus = 'no'; // Set generating status back to "no"
             return promptText; // Return the generated prompt text
         })
         .catch(error => {
             console.error('Error fetching prompt:', error);
-            this.isGenerating = 'no'; // Ensure generating status is set back to no in case of error
+            this.isGeneratingStatus = 'no'; // Ensure generating status is set back to "no" in case of error
             return 'Error fetching prompt.'; // Return an error message
         });
     }
 
     isGenerating() {
-        return this.isGenerating; // Returns the current generating status
+        return this.isGeneratingStatus; // Return the current generating status ("yes" or "no")
     }
 }
 
